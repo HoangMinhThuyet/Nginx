@@ -1,0 +1,24 @@
+Tải phiên bản nginx mới nhất trên trang http://nginx.org/download/  ở lab này dùng phiên bản nginx-1.15.12
+# cai dat cac goi phu thuoc
+yum install gcc gcc-c++ -y
+## Cài đặt các gói opensource phụ thuộc: openssl-1.0.2 | pcre2-10.33 | zlib-1.2.11
+ Đối với pcre và zlib thì cài đặt bình thường bằng: "./configure && make && make install"  còn đối với openssl sẽ cài đặt sau.
+ ### cài đặt các module cần thiết
+ 1. pagespeed
+   NPS_VERSION=1.13.35.2-stable
+  cubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
+  NPS_VERSION=1.13.35.2-stable
+  wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
+  unzip v${NPS_VERSION}.zip
+  yum install unzip -y
+  unzip v${NPS_VERSION}.zip
+  nps_dir=$(find . -name "*pagespeed-ngx-${NPS_VERSION}" -type d)
+  cd "$nps_dir"
+  NPS_RELEASE_NUMBER=${NPS_VERSION/beta/}
+  NPS_RELEASE_NUMBER=${NPS_VERSION/stable/}
+  psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_RELEASE_NUMBER}.tar.gz
+  [ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
+  wget ${psol_url}
+  tar -xzvf $(basename ${psol_url})
+
+
